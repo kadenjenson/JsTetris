@@ -1,3 +1,14 @@
-h1 {
-	color: pink;
+.block {
+	width: 50px;
+	height: 50px;
+	display: inline-block;
+	outline: 3px solid black;
+}
+
+.empty {
+	background-color: black;
+}
+
+.square {
+	background-color: blue;
 }
