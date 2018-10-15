@@ -1,7 +1,7 @@
 var canvas = [
+	[0, 0, 0, 1, 1, 0, 0, 0],
+	[0, 0, 0, 1, 1, 0, 0, 0],
 	[0, 0, 0, 0, 0, 0, 0, 0],
-	[0, 0, 0, 1, 1, 0, 0, 0],
-	[0, 0, 0, 1, 1, 0, 0, 0],
 	[0, 0, 0, 0, 0, 0, 0, 0],
 	[0, 0, 0, 0, 0, 0, 0, 0],
 	[0, 0, 0, 0, 0, 0, 0, 0],
@@ -27,7 +27,7 @@ function drawCanvas() {
 	}
 }
 
-function moveBlock() {
+function moveBlocks() {
 	var canMove = true;
 	for ( var i = 0; i < canvas.length; i++ ) {
 		for ( var x = 0; x < canvas[i].length; x++ ) {
@@ -50,6 +50,11 @@ function moveBlock() {
 	}
 }
 
+function gameLoop() {
+	moveBlocks();
+	drawCanvas();
+	setTimeout(gameLoop, 1000);
+}
+
 drawCanvas();
-moveBlock();
-drawCanvas();
+gameLoop();
