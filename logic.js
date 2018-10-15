@@ -21,6 +21,7 @@ function drawCanvas() {
 				document.getElementById('canvas').innerHTML += "<div class='empty block'></div>"
 			}
 		}
+		document.getElementById('canvas').innerHTML += "<br>"
 	}
 }
 drawCanvas();
