@@ -1,16 +1,16 @@
 let canvas = [
-	[0, 0, 0, 1, 1, 0, 0, 0],
-	[0, 0, 0, 1, 1, 0, 0, 0],
-	[0, 0, 0, 0, 0, 0, 0, 0],
-	[0, 0, 0, 0, 0, 0, 0, 0],
-	[0, 0, 0, 0, 0, 0, 0, 0],
-	[0, 0, 0, 0, 0, 0, 0, 0],
-	[0, 0, 0, 0, 0, 0, 0, 0],
-	[0, 0, 0, 0, 0, 0, 0, 0],
-	[0, 0, 0, 0, 0, 0, 0, 0],
-	[0, 0, 0, 0, 0, 0, 0, 0],
-	[0, 0, 0, 11, 11, 0, 0, 0],
-	[0, 0, 0, 11, 11, 0, 0, 0]
+	[0, 0, 0, 0, 1, 1, 0, 0, 0, 0],
+	[0, 0, 0, 0, 1, 1, 0, 0, 0, 0],
+	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 ];
 
 function drawCanvas() {
@@ -79,7 +79,7 @@ function moveBlocksRight() {
 	for ( var i = 0; i < canvas.length; i++ ) {
 		for ( var x = 0; x < canvas[i].length; x++ ) {
 			if ( canvas[i][x] > 0 && canvas[i][x] < 10 ) {
-				if ( x === 7 || canvas[i][x+1] > 10 ) {
+				if ( x === 9 || canvas[i][x+1] > 10 ) {
 					canMove = false;
 				}
 			}
@@ -105,8 +105,36 @@ function stop() {
 			}
 		}
 	}
-	canvas[0] = [0, 0, 0, 1, 1, 0, 0, 0];
-	canvas[1] = [0, 0, 0, 1, 1, 0, 0, 0];
+	checkRows();
+	let random = Math.floor(Math.random()*3);
+	if (random === 0) {
+		canvas[0] = [0, 0, 0, 1, 1, 0, 0, 0, 0, 0];
+		canvas[1] = [0, 0, 0, 1, 1, 0, 0, 0, 0, 0];
+	} else if (random === 1) {
+		canvas[0] = [0, 0, 0, 0, 1, 0, 0, 0, 0, 0];
+		canvas[1] = [0, 0, 0, 0, 1, 0, 0, 0, 0, 0];
+		canvas[2] = [0, 0, 0, 0, 1, 0, 0, 0, 0, 0];
+		canvas[3] = [0, 0, 0, 0, 1, 0, 0, 0, 0, 0];
+	} else if (random === 2) {
+		canvas[0] = [0, 0, 0, 0, 1, 1, 0, 0, 0, 0];
+		canvas[1] = [0, 0, 0, 1, 1, 0, 0, 0, 0, 0];
+	}
+}
+
+function checkRows() {
+	for ( var y = 0;  y < canvas.length; y++ ) {
+		fullRow = true;
+		for ( var x = 0; x < canvas[y].length; x++ ) {
+			if( canvas[y][x] < 10 ) {
+				fullRow = false;
+			}
+		}
+		if(fullRow) {
+			canvas.splice(y, 1);
+			canvas.splice(0,0,[0,0,0,0,0,0,0,0,0,0]);
+			y--;
+		}
+	}
 }
 
 document.onkeydown = function(e) {
@@ -114,6 +142,8 @@ document.onkeydown = function(e) {
 		moveBlocksLeft();
 	} else if ( e.keyCode === 39 ) {
 		moveBlocksRight();
+	} else if ( e.keyCode === 40 ) {
+		moveBlocks();
 	}
 	drawCanvas();
 }

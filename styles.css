@@ -6,7 +6,7 @@ body {
 }
 
 .tetris-block {
-	width: 480px;
+	width: 580px;
 	margin: 50px 50px;
 	background: -webkit-linear-gradient(top left, #F8D353, #FF5C5A);
 	background: -moz-linear-gradient(top left, #F8D353, #FF5C5A);
@@ -14,7 +14,7 @@ body {
 }
 
 #canvas {
-	width: 400px;
+	width: 500px;
 	margin: auto;
 	padding-top: 40px;
 	padding-bottom: 40px;
