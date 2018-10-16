@@ -1,4 +1,4 @@
-var canvas = [
+let canvas = [
 	[0, 0, 0, 1, 1, 0, 0, 0],
 	[0, 0, 0, 1, 1, 0, 0, 0],
 	[0, 0, 0, 0, 0, 0, 0, 0],
@@ -51,6 +51,29 @@ function moveBlocks() {
 	}
 }
 
+function moveBlocksLeft() {
+	var canMove = true;
+	for ( var i = 0; i < canvas.length; i++ ) {
+		for ( var x = 0; x < canvas[i].length; x++ ) {
+			if ( canvas[i][x] > 0 && canvas[i][x] < 10 ) {
+				if ( x === 0 || canvas[i][x-1] > 10 ) {
+					canMove = false;
+				}
+			}
+		}
+	}
+	if(canMove) {
+		for ( var i = canvas.length-1; i>=0; i-- ) {
+			for ( var x = 0; x < canvas[i].length; x++ ) {
+				if( canvas[i][x] > 0 && canvas[i][x] < 10 ) {
+					canvas[i][x-1] = canvas[i][x];
+					canvas[i][x] = 0;
+				}
+			}
+		}
+	}
+}
+
 function stop() {
 	for ( var i = 0; i < canvas.length; i++ ) {
 		for ( var x = 0; x < canvas[i].length; x++ ) {
@@ -58,6 +81,14 @@ function stop() {
 				canvas[i][x] = canvas[i][x] + 10;
 			}
 		}
+	}
+	canvas[0] = [0, 0, 0, 1, 1, 0, 0, 0];
+	canvas[1] = [0, 0, 0, 1, 1, 0, 0, 0];
+}
+
+document.onkeydown = function(e) {
+	if( e.keyCode === 37 ) {
+		moveBlocksLeft();
 	}
 }
 
@@ -69,3 +100,9 @@ function gameLoop() {
 
 drawCanvas();
 gameLoop();
+
+
+
+
+
+
