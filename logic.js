@@ -34,6 +34,7 @@ function moveBlocks() {
 			if ( canvas[i][x] > 0 && canvas[i][x] < 10 ) {
 				if ( i === canvas.length-1 || canvas[i+1][x] > 10 ) {
 					canMove = false;
+					stop();
 				}
 			}
 		}
@@ -45,6 +46,16 @@ function moveBlocks() {
 					canvas[i+1][x] = canvas[i][x];
 					canvas[i][x] = 0;
 				}
+			}
+		}
+	}
+}
+
+function stop() {
+	for ( var i = 0; i < canvas.length; i++ ) {
+		for ( var x = 0; x < canvas[i].length; x++ ) {
+			if( canvas[i][x] > 0 && canvas[i][x] < 10 ) {
+				canvas[i][x] = canvas[i][x] + 10;
 			}
 		}
 	}
