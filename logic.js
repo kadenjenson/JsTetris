@@ -74,6 +74,29 @@ function moveBlocksLeft() {
 	}
 }
 
+function moveBlocksRight() {
+	var canMove = true;
+	for ( var i = 0; i < canvas.length; i++ ) {
+		for ( var x = 0; x < canvas[i].length; x++ ) {
+			if ( canvas[i][x] > 0 && canvas[i][x] < 10 ) {
+				if ( x === 7 || canvas[i][x+1] > 10 ) {
+					canMove = false;
+				}
+			}
+		}
+	}
+	if(canMove) {
+		for ( var i = canvas.length-1; i>=0; i-- ) {
+			for ( var x = canvas[i].length; x >= 0; x-- ) {
+				if( canvas[i][x] > 0 && canvas[i][x] < 10 ) {
+					canvas[i][x+1] = canvas[i][x];
+					canvas[i][x] = 0;
+				}
+			}
+		}
+	}
+}
+
 function stop() {
 	for ( var i = 0; i < canvas.length; i++ ) {
 		for ( var x = 0; x < canvas[i].length; x++ ) {
@@ -89,7 +112,10 @@ function stop() {
 document.onkeydown = function(e) {
 	if( e.keyCode === 37 ) {
 		moveBlocksLeft();
+	} else if ( e.keyCode === 39 ) {
+		moveBlocksRight();
 	}
+	drawCanvas();
 }
 
 function gameLoop() {
